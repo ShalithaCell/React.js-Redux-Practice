@@ -15,10 +15,60 @@
     
     <script type="text/babel">
          class App extends React.Component{
+             state = {
+                 id : 1,
+                 name : 'Shalitha Senanayaka',
+                 dob : '97/04/21',
+                 country : 'SriLanka'
+             }
+
+             //method for buttonClick handle
+             ButtonClickHandler(e){
+                 console.log('Mouse clicked!');
+             }
+
+             //method for copy handler
+             TextCopyHandler(e){
+                 console.log('Text copied');
+             }
+
+             //method for print state in console
+             PrintState = (e) => {
+                 console.log(this.state);
+             }
+
+             //method for change state
+             ChnageState = (e) => {
+                 if(this.state.id == 1){
+                    this.setState({
+                     id : 2,
+                     name : 'Kevin',
+                     dob : '90/01/20',
+                     country : 'USA'
+                    });
+                 }else{
+                    this.setState({
+                     id : 1,
+                     name : 'Shalitha Senanayaka',
+                     dob : '97/04/21',
+                     country : 'SriLanka'
+                    });
+                 }
+                 
+             }
+
              render() {
                  return (
                      <div className="app-content">
                         <h1>Hello world</h1>
+                        <p>Name : {this.state.name} <br/>
+                           DOB  : {this.state.dob} <br/>
+                           Country : {this.state.country}
+                        </p>
+                        <button onClick={this.ButtonClickHandler}>Click and see console.</button><br/><br/>
+                        <button onClick={this.PrintState}>Print state in console.</button><br/><br/>
+                        <button onClick={this.ChnageState}>Chnage State</button>
+                        <p onCopy={this.TextCopyHandler}>Ths is sample text for copy. Copy this text and see console.</p>
                     </div>
                  )
              }
