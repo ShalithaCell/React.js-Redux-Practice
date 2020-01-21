@@ -7,6 +7,9 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" 
+        crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
@@ -16,59 +19,30 @@
     <script type="text/babel">
          class App extends React.Component{
              state = {
-                 id : 1,
-                 name : 'Shalitha Senanayaka',
-                 dob : '97/04/21',
-                 country : 'SriLanka'
+                 name : 'Enter text here...'
              }
 
-             //method for buttonClick handle
-             ButtonClickHandler(e){
-                 console.log('Mouse clicked!');
+             ChangeTextEvent = (e) => {
+                 this.setState({
+                     name : e.target.value
+                });
              }
 
-             //method for copy handler
-             TextCopyHandler(e){
-                 console.log('Text copied');
-             }
-
-             //method for print state in console
-             PrintState = (e) => {
-                 console.log(this.state);
-             }
-
-             //method for change state
-             ChnageState = (e) => {
-                 if(this.state.id == 1){
-                    this.setState({
-                     id : 2,
-                     name : 'Kevin',
-                     dob : '90/01/20',
-                     country : 'USA'
-                    });
-                 }else{
-                    this.setState({
-                     id : 1,
-                     name : 'Shalitha Senanayaka',
-                     dob : '97/04/21',
-                     country : 'SriLanka'
-                    });
-                 }
-                 
+             FormSubmitHandler = (e) => {
+                 e.preventDefault();
+                this.setState({
+                     name : 'Form submited. No page refresh because it prevented !'
+                });
              }
 
              render() {
                  return (
-                     <div className="app-content">
-                        <h1>Hello world</h1>
-                        <p>Name : {this.state.name} <br/>
-                           DOB  : {this.state.dob} <br/>
-                           Country : {this.state.country}
-                        </p>
-                        <button onClick={this.ButtonClickHandler}>Click and see console.</button><br/><br/>
-                        <button onClick={this.PrintState}>Print state in console.</button><br/><br/>
-                        <button onClick={this.ChnageState}>Chnage State</button>
-                        <p onCopy={this.TextCopyHandler}>Ths is sample text for copy. Copy this text and see console.</p>
+                     <div className="app-content" class="col-md-4">
+                        <form onSubmit={this.FormSubmitHandler}>
+                            <h3>{this.state.name}</h3>
+                            <input type="text" class="form-control" onChange={this.ChangeTextEvent}/><br/>
+                            <input type="submit" value="Submit" class="btn btn-success col-md-3"/>
+                        </form>
                     </div>
                  )
              }
@@ -77,4 +51,16 @@
          ReactDOM.render(<App />, document.getElementById('app'));
     </script>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" 
+integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" 
+crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" 
+integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" 
+crossorigin="anonymous"></script>
 </html>
