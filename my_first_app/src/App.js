@@ -1,22 +1,43 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import HomeClass from './Home'
+import CreateForm from './CreateForm'
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
 
 class App extends Component {
   state = {
     obj : [
-      {name : 'Shalitha', dob : '97-04-21', id : 1},
-      {name : 'Peter', dob : '80-04-21', id : 2},
-      {name : 'Kevin', dob : '890-04-21', id : 3}
+      {email : 'test@gmail.com' , firstName : 'test' , id : 1, lastName : 'test', userName : 'test'}
     ]
   }
+
+  AddFormDetails = (details) => {
+    details.id = Math.random();
+
+    let blueCopyObj = [...this.state.obj, details]
+
+    this.setState({
+      obj : blueCopyObj
+    })
+  }
+
+  DeleteItemHandler = (itemID) => {
+    let newObj = this.state.obj.filter(row => {
+      return row.id !== itemID;
+    })
+
+    this.setState({
+      obj : newObj
+    })
+  }
+
   render(){
     return (
       <div className="App">
         <h1>My First React App</h1>
-        <HomeClass obj={this.state.obj}/>
+        <HomeClass deleteItem={this.DeleteItemHandler} obj={this.state.obj}/>
+        <CreateForm addMethod={this.AddFormDetails}/>
       </div>
     );
   }
