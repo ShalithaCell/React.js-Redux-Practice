@@ -24,7 +24,7 @@ class App extends Component {
 
   DeleteItemHandler = (itemID) => {
     let newObj = this.state.obj.filter(row => {
-      return row.id !== itemID;
+      return row.id != itemID;
     })
 
     this.setState({
