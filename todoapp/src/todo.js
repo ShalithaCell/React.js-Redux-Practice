@@ -7,7 +7,7 @@ const Todos = ({todos, deleteHandler}) => {
             return(
                 <li className="list-group-item" key={item.id} >
                     {item.content}
-                    <input type="button" className="btn btn-danger float-right" value="Remove" onClick={() => {deleteHandler(item.id)}}/>
+                    <input type="button" className="btn red darken-1 float-right" value="Remove" onClick={() => {deleteHandler(item.id)}}/>
                 </li>
             )
         })
