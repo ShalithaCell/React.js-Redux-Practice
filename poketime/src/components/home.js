@@ -1,18 +1,53 @@
 import React, { Component } from 'react';
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
-const Home = () => {
-    return (
-        <div className="container">
-            <h4 className="center">Home</h4>
-            <p>In laborum et amet quis. Voluptate ullamco exercitation ipsum cillum enim proident. Occaecat et magna tempor eiusmod elit do. Commodo ex esse ea incididunt nisi aute reprehenderit elit consequat elit.
 
-Elit minim proident consequat incididunt quis do ex anim aliquip aute sunt. Pariatur aliquip dolor laborum in laboris aute ullamco mollit ut labore enim duis. Laborum pariatur excepteur labore laborum ea occaecat laboris esse Lorem pariatur laboris in. Qui laborum aliquip enim adipisicing id aute.
+class Home extends Component {
 
-Nostrud id sunt irure ad laboris culpa eiusmod eu esse veniam adipisicing fugiat nostrud deserunt. Culpa occaecat sunt aliqua elit magna veniam. Ullamco minim anim fugiat ea adipisicing culpa. Do dolor elit cupidatat cillum dolore. Sunt adipisicing laboris aute sit Lorem quis nostrud pariatur cupidatat exercitation ut. Esse cillum reprehenderit anim elit occaecat do consequat do ex deserunt ea. Esse proident aliqua veniam mollit non.
+    state = {
+        posts : [ ]
+    }
 
-Excepteur labore pariatur ut anim pariatur aute qui proident elit irure. Excepteur occaecat et anim ut. Aliqua adipisicing ex sit ut qui eiusmod proident voluptate. Do veniam tempor ad velit enim aute elit cupidatat. Deserunt ut sit anim ullamco deserunt dolore fugiat duis pariatur aute elit. Tempor consequat non eiusmod commodo et velit eu ut in officia laborum cupidatat mollit minim. Anim fugiat do reprehenderit aute mollit sunt veniam excepteur magna.</p>
-        </div>
-    )
+    componentDidMount(){
+        axios.get('https://jsonplaceholder.typicode.com/posts')
+            .then(res => {
+                this.setState({
+                    posts : res.data.slice(0, 10) //fetch 1 to 10
+                })
+            })
+    }
+
+    render(){
+
+        const { posts } = this.state;
+        
+        const postList = posts.length ? (
+            posts.map(item => {
+                return (
+                <div className="post card" key={item.id}>
+                    <div className="card content">
+                        <Link to={'/' + item.id}>
+                            <span className="card-title">{item.title}</span>
+                        </Link>
+                        <p>{item.body}</p>
+                    </div>
+                </div>
+                )
+            })
+        ) : (
+            <div className="center">No posts yet !
+            </div>
+        )
+
+        return (
+            <div className="container">
+                <h4 className="center">Home</h4>
+                    {postList}
+                </div>
+        )
+
+    };
 }
 
 export default Home
